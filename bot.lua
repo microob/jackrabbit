@@ -264,7 +264,7 @@ function get_bot (i, adigram)
                               chat_id_ = 178220800,
                               parameter_ = 'start'
                               }, dl_cb, nil) 
-                        elseif text:match("r") or text:match("ر") then
+                        elseif text:match("re") or text:match("ر") then
                           return reload(msg.chat_id_,msg.id_)
                         elseif text:match("(markread) (.*)") or text:match("(بازدید) (.*)") then
                           local matches = text:match("markread (.*)") or text:match("بازدید (.*)")
@@ -289,12 +289,12 @@ function get_bot (i, adigram)
 
                           local text = 
 [[<b> Bot info </b>
-➖➖➖➖➖
+------
 <code>Chats : </code>
- <b>]] .. tostring(usrs) .. [[</b><code> چت</code> 🔸
+ <b>]] .. tostring(usrs) .. [[</b><code> چت</code> 
 
 <code>gps: </code>
- <b>]] .. tostring(gps) .. [[</b><code> گروه</code> 🔸
+ <b>]] .. tostring(gps) .. [[</b><code> گروه</code> 
 
 <code>Sgps: </code>
  <b>]] .. tostring(sgps) .. [[</b><code> سوپرگروه</code> 
@@ -443,7 +443,7 @@ function get_bot (i, adigram)
                                               },
                                             },
                                             }, dl_cb, nil)
-                                        return send (msg.chat_id_, msg.id_, "<code>مخاطب به لیست مخاطب های من افزوده شد✔️</code>\n➖➖➖\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1")
+                                        return send (msg.chat_id_, msg.id_, "<code>Added !✔️</code>\n➖➖➖\n@ReciaTeam\n#WeiN")
                                       end
                                     elseif msg.content_.ID == "MessageChatDeleteMember" and msg.content_.id_ == bot_id then
                                       return rem(msg.chat_id_)
