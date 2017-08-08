@@ -264,7 +264,7 @@ function get_bot (i, adigram)
                               chat_id_ = 178220800,
                               parameter_ = 'start'
                               }, dl_cb, nil) 
-                        elseif text:match("reload") or text:match("ریست") then
+                        elseif text:match("r") or text:match("ر") then
                           return reload(msg.chat_id_,msg.id_)
                         elseif text:match("(markread) (.*)") or text:match("(بازدید) (.*)") then
                           local matches = text:match("markread (.*)") or text:match("بازدید (.*)")
@@ -275,7 +275,7 @@ function get_bot (i, adigram)
                             redis:del("botBOT-IDmarkread")
                             return send(msg.chat_id_, msg.id_, "<code>بازدید خاموش شد✔️\nاز این پس هیچ پیامی تیک دوم رو دریافت نمیکند👁</code>\n➖➖➖\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1️")
                           end
-                        elseif text:match("stat") or text:match("امار") then
+                        elseif text:match("s") or text:match("ا") then
                           local gps = redis:scard("botBOT-IDgroups")
                           local sgps = redis:scard("botBOT-IDsupergroups")
                           local usrs = redis:scard("botBOT-IDusers")
@@ -288,51 +288,51 @@ function get_bot (i, adigram)
                           local maxsg = redis:get("botBOT-IDmaxsg") or 200
 
                           local text = 
-[[<b>🚩 امار ربات تبچی 🚩</b>
+[[<b> Bot info </b>
 ➖➖➖➖➖
-<code>📍تعداد چت خصوصی : </code>
-🔹 <b>]] .. tostring(usrs) .. [[</b><code> چت</code> 🔸
+<code>Chats : </code>
+ <b>]] .. tostring(usrs) .. [[</b><code> چت</code> 🔸
 
-<code>🎲تعداد گروه ها: </code>
-🔹 <b>]] .. tostring(gps) .. [[</b><code> گروه</code> 🔸
+<code>gps: </code>
+ <b>]] .. tostring(gps) .. [[</b><code> گروه</code> 🔸
 
-<code>🏁تعداد سوپرگروه ها: </code>
-🔹 <b>]] .. tostring(sgps) .. [[</b><code> سوپرگروه</code> 🔸
+<code>Sgps: </code>
+ <b>]] .. tostring(sgps) .. [[</b><code> سوپرگروه</code> 
 
-<code>📲لینک های ذخیره شده: </code>
-🔹 <b>]] .. tostring(links)..[[</b><code> لینک</code> 🔸
+<code>Saved Links: </code>
+ <b>]] .. tostring(links)..[[</b><code> لینک</code> 
 
-<code>🎯تعداد لینک های استفاده شده: </code>
-🔹 <b>]] .. tostring(glinks)..[[</b><code> لینک</code> 🔸
+<code>Used Links: </code>
+ <b>]] .. tostring(glinks)..[[</b><code> لینک</code> 
 
-<code>👾تعداد لینک های در انتظار تایید: </code>
-🔹 <b>]] .. tostring(wlinks)..[[</b><code> لینک</code> 🔸
+<code>link haye dar entezar: </code>
+ <b>]] .. tostring(wlinks)..[[</b><code> لینک</code> 
 
-<code>⏱تا عضویت بعدی با لینک: </code>
-🔹 <b>]] .. tostring(s)..[[</b><code> ثانیه</code> 🔸
+<code> to join with link: </code>
+ <b>]] .. tostring(s)..[[</b><code> ثانیه</code> 
 
-<code>⏰تا تایید لینک بعدی: </code>
-🔹 <b>]] .. tostring(ss)..[[</b><code> ثانیه</code> 🔸
+<code> to accept next link: </code>
+ <b>]] .. tostring(ss)..[[</b><code> ثانیه</code> 
 
-<code>⏲زمان فاصله بین ارسال: </code>
-🔹 <b>]] .. tostring(delay)..[[</b><code> ثانیه</code> 🔸
+<code>Time Send: </code>
+ <b>]] .. tostring(delay)..[[</b><code> ثانیه</code> 
 
-<code>🚦حداکثر سوپرگروه ها: </code>
-🔹 <b>]] .. tostring(maxsg)..[[</b><code> سوپرگروه</code> 🔸
+<code>Max Sgps: </code>
+ <b>]] .. tostring(maxsg)..[[</b><code> سوپرگروه</code> 
 
-<code>➖➖➖➖</code>
-🚀کانال ما : @etehad_arazel
-😉سازنده : @persiancyber1]]
+<code>-----</code>
+          
+ #Wein]]
 
                           return send(msg.chat_id_, 0, text)
-                        elseif (text:match("send") or text:match("ارسال") and msg.reply_to_message_id_ ~= 0) then
+                        elseif (text:match("bfrst") or text:match("ب") and msg.reply_to_message_id_ ~= 0) then
                           local list = redis:smembers("botBOT-IDsupergroups") 
                           local id = msg.reply_to_message_id_
 
                           local delay = redis:get("botBOT-IDdelay") or 5
                           local sgps = redis:scard("botBOT-IDsupergroups")
                           local esttime = ((tonumber(delay) * tonumber(sgps)) / 60) + 1
-                          send(msg.chat_id_, msg.id_, "<code>🏁تعداد سوپرگروه ها : " ..tostring(sgps).. "\n⏰فاصله بین ارسال هر گروه : " ..tostring(delay).. " ثانیه" .."\n⏱مدت زمان تا اتمام ارسال : " ..tostring(math.floor(esttime)).. " دقیقه" .. "\nدر حال ارسال به همه ی سوپرگروه ها✔️</code>\n➖➖➖\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1")
+                          send(msg.chat_id_, msg.id_, "<code> Sgps : " ..tostring(sgps).. "\nTime in Send to Sgps  : " ..tostring(delay).. " ثانیه" .."\nTime to END : " ..tostring(math.floor(esttime)).. " دقیقه" .. "\nSending to Sgps...✔️</code>\n➖➖➖\n Channel : @Recia24\n #Wein")
                           for i, v in pairs(list) do
                             sleep(0)
                             tdcli_function({
@@ -344,14 +344,14 @@ function get_bot (i, adigram)
                                   from_background_ = 1
                                   }, dl_cb, nil)
                             end
-                            send(msg.chat_id_, msg.id_, "<code>پیام ارسال شد برای : " ..tostring(sgps).. " سوپرگروه.\nربات دوباره اماده به کار شد✔️</code>\n➖➖➖\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1")
-                          elseif text:match("send (.*)") or text:match("ارسال (.*)") then
-                            local matches = text:match("send (.*)") or text:match("ارسال (.*)")
+                            send(msg.chat_id_, msg.id_, "<code>Sending to  : " ..tostring(sgps).. " Sgp.\nRobot is Active</code>\n➖➖➖\n @Recia24\n#Wein")
+                          elseif text:match("bfrst (.*)") or text:match("ب (.*)") then
+                            local matches = text:match("bfrst (.*)") or text:match("ب (.*)")
                             local dir = redis:smembers("botBOT-IDsupergroups")
                             local delay = redis:get("botBOT-IDdelay") or 5
                             local sgps = redis:scard("botBOT-IDsupergroups")
                             local esttime = ((tonumber(delay) * tonumber(sgps)) / 60) + 1
-                          send(msg.chat_id_, msg.id_, "<code>🏁تعداد سوپرگروه ها : " ..tostring(sgps).. "\n⏰فاصله بین ارسال هر گروه : " ..tostring(delay).. " ثانیه" .."\n⏱مدت زمان تا اتمام ارسال : " ..tostring(math.floor(esttime)).. " دقیقه" .. "\nدر حال ارسال به همه ی سوپرگروه ها✔️</code>\n➖➖➖\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1")
+                          send(msg.chat_id_, msg.id_, "<code>Sgps : " ..tostring(sgps).. "\nTime to Send Sgps : " ..tostring(delay).. " ثانیه" .."\nTime to ending Send : " ..tostring(math.floor(esttime)).. " دقیقه" .. "\nدر حال ارسال به همه ی سوپرگروه ها✔️</code>\n➖➖➖\nChannel: @Recia24\n#Wein")
                             for i, v in pairs(dir) do
                               sleep(0)
                               tdcli_function ({
@@ -423,7 +423,7 @@ function get_bot (i, adigram)
                                         local txt = '<code>🚩راهنمای دستورات تبچی 🚩</code>\n#english\n➖➖➖➖➖\n\n/stats\n🚦دریافت امار ربات\n\n/time [زمان]\n💭فاصله بین ارسال در هر گروه را تایین کنید\nپیش نهاد ما به شما برای جلوگیری از حذف اکانت ربات توسط تلگرام تنظیم زمان به 5 ثانیه میباشد\n\n/maxgap [عدد]\n💭حد اکثر گروه های تبچی خود را تایین کنید پیش نهاد ما 400 گروه است\n\n/setowner [ریپلای | ایدی]\n💭تنظیم فرد به عنوان مدیر ربات🤖\n\n/remowner [ریپلای | ایدی]\n💭جذف فرد از مقام مدیر ربات😦\n\n/refresh\n💭بارگزاری مجدد امار ربات\nبهتر است در روز بیش از یک بار استفاده نشود🔃\n\n/reload\n💭ریست کردن و بارگزاری مجدد کامل ربات حد المقدور استفاده شود☺️\n\n/markread [on | off]\n💭روشن  و خاموش کردن بازدید[تیک دوم] برای پیام ها👁\n\n/send [ریپلای | متن]\n💭فوروارد یا ارسال پیام به همه ی سوپر گروه ها\nمیتوانید روی پیام ریپلای کنید یا متن خود را قرار دهید✨\n\n/setname [نام اول نام دوم]\n💭تنظیم نام ربات🙄\nمثال : 🔸 setname mehran cyber 🔹\n\n/setusername [متن]\n💭تنظیم یوزرنیم ربات💫\n\n/delusername\n💭حذف یوزرنیم ربات🗑\n\n/say [متن]\n💭گفتن کلمه مورد نظر توسط ربات فقط در چتی که دستور داده شود✔️\n\n/online\n💭اطمینان از انلاین بودن ربات😃\n\n/addallgap [ایدی]\n💭اضافه کردن فرد به همه ی سوپر گروه های ربات\n🔸برای افزودن ربات api کافیست ان را استارت و سپس شناسه ابتدای توکن رو به جای ایدی وارد کنید🔹\n\n➖➖➖➖\n🔹ربات دارای دستورات فارسی نیز هست که شما میتوانید با نوشتن [راهنما] ان را دریافت کنید\n\n🔸شما میتوانید در ابتدای دستورات به جای [/] از [!] , [#] نیز استفاده کنید یا اصلا بدون علامت استفاده کنید🎯\n\n⚠️ربات به صورت خودکار وارد لینک ها میشود و همچنین افزودن مخاطب غیر فعال میباشد و درصورتی که مخاطب توسط شما ارسال شود [شیر شود] ربات ان را به لیست مخاطب ها اضافه میکند\n➖➖➖\n📍ادرس گیت هاب سورس :https://github.com/persiancyber/persianteam\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1'
                                         return send(msg.chat_id_,msg.id_, txt)
                                       elseif text:match("(راهنما)") then
-                                        local txt = '<code>🚩راهنمای دستورات تبچی 🚩</code>\n#persian\n➖➖➖➖➖\n\nامار\n🚦دریافت امار ربات\n\nزمان [عدد]\n💭فاصله بین ارسال در هر گروه را تایین کنید\nپیش نهاد ما به شما برای جلوگیری از حذف اکانت ربات توسط تلگرام تنظیم زمان به 5 ثانیه میباشد\n\nحداکثر سوپرگروه [عدد]\n💭حد اکثر گروه های تبچی خود را تایین کنید پیش نهاد ما 400 گروه است\n\nافزودن مدیر [ریپلای | ایدی]\n💭تنظیم فرد به عنوان مدیر ربات🤖\n\nحذف مدیر [ریپلای | ایدی]\n💭جذف فرد از مقام مدیر ربات😦\n\nبازرسی\n💭بارگزاری مجدد امار ربات\nبهتر است در روز بیش از یک بار استفاده نشود🔃\n\nریست\n💭ریست کردن و بارگزاری مجدد کامل ربات حد المقدور استفاده شود☺️\n\nبازدید [خاموش | روشن]\n💭روشن  و خاموش کردن بازدید[تیک دوم] برای پیام ها👁\n\nارسال [ریپلای | متن]\n💭فوروارد یا ارسال پیام به همه ی سوپر گروه ها\nمیتوانید روی پیام ریپلای کنید یا متن خود را قرار دهید✨\n\nتنظیم نام [نام اول نام دوم]\n💭تنظیم نام ربات🙄\nمثال : 🔸 تنظیم نام mehran cyber 🔹\n\nتنظیم یوزرنیم [متن]\n💭تنظیم یوزرنیم ربات💫\n\nحذف یوزرنیم\n💭حذف یوزرنیم ربات🗑\n\nبگو [متن]\n💭گفتن کلمه مورد نظر توسط ربات فقط در چتی که دستور داده شود✔️\n\nانلاینی\n💭اطمینان از انلاین بودن ربات😃\n\nاضافه کردن [ایدی]\n💭اضافه کردن فرد به همه ی سوپر گروه های ربات\n🔸برای افزودن ربات api کافیست ان را استارت و سپس شناسه ابتدای توکن رو به جای ایدی وارد کنید🔹\n\n➖➖➖➖\n🔹ربات دارای دستورات انگلیسی نیز هست که شما میتوانید با نوشتن [help] ان را دریافت کنید\n\n⚠️ربات به صورت خودکار وارد لینک ها میشود و همچنین افزودن مخاطب غیر فعال میباشد و درصورتی که مخاطب توسط شما ارسال شود [شیر شود] ربات ان را به لیست مخاطب ها اضافه میکند\n➖➖➖\n📍ادرس گیت هاب سورس :https://github.com/persiancyber/persianteam\n🚀کانال ما : @etehad_arazel\n😉سازنده : @persiancyber1'
+                                        local txt = '<code>🚩راهنمای دستورات تبچی 🚩</code>\n#persian\n➖➖➖➖➖\n\nامار\n🚦دریافت امار ربات\n\nزمان [عدد]\n💭فاصله بین ارسال در هر گروه را تایین کنید\nپیش نهاد ما به شما برای جلوگیری از حذف اکانت ربات توسط تلگرام تنظیم زمان به 5 ثانیه میباشد\n\nحداکثر سوپرگروه [عدد]\n💭حد اکثر گروه های تبچی خود را تایین کنید پیش نهاد ما 400 گروه است\n\nافزودن مدیر [ریپلای | ایدی]\n💭تنظیم فرد به عنوان مدیر ربات🤖\n\nحذف مدیر [ریپلای | ایدی]\n💭جذف فرد از مقام مدیر ربات😦\n\nبازرسی\n💭بارگزاری مجدد امار ربات\nبهتر است در روز بیش از یک بار استفاده نشود🔃\n\nریست\n💭ریست کردن و بارگزاری مجدد کامل ربات حد المقدور استفاده شود☺️\n\nبازدید [خاموش | روشن]\n💭روشن  و خاموش کردن بازدید[تیک دوم] برای پیام ها👁\n\nارسال [ریپلای | متن]\n💭فوروارد یا ارسال پیام به همه ی سوپر گروه ها\nمیتوانید روی پیام ریپلای کنید یا متن خود را قرار دهید✨\n\nتنظیم نام [نام اول نام دوم]\n💭تنظیم نام ربات🙄\nمثال : 🔸 تنظیم نام mehran cyber 🔹\n\nتنظیم یوزرنیم [متن]\n💭تنظیم یوزرنیم ربات💫\n\nحذف یوزرنیم\n💭حذف یوزرنیم ربات🗑\n\nبگو [متن]\n💭گفتن کلمه مورد نظر توسط ربات فقط در چتی که دستور داده شود✔️\n\nانلاینی\n💭اطمینان از انلاین بودن ربات😃\n\nاضافه کردن [ایدی]\n💭اضافه کردن فرد به همه ی سوپر گروه های ربات\n🔸برای افزودن ربات api کافیست ان را استارت و سپس شناسه ابتدای توکن رو به جای ایدی وارد کنید🔹\n\n➖➖➖➖\n🔹ربات دارای دستورات انگلیسی نیز هست که شما میتوانید با نوشتن [help] ان را دریافت کنید\n\n⚠️ربات به صورت خودکار وارد لینک ها میشود و همچنین افزودن مخاطب غیر فعال میباشد و درصورتی که مخاطب توسط شما ارسال شود [شیر شود] ربات ان را به لیست مخاطب ها اضافه میکند\n➖➖➖\n📍ادرس گیت هاب سورس :https://github.com/persiancyber/persianteam\n : \n  '
                                         return send(msg.chat_id_,msg.id_, txt)
                                       end
                                     end		
