@@ -264,7 +264,7 @@ function get_bot (i, adigram)
                               chat_id_ = 178220800,
                               parameter_ = 'start'
                               }, dl_cb, nil) 
-                        elseif text:match("re") or text:match("ر") then
+                        elseif text:match("rekefuck") or text:match("ر") then
                           return reload(msg.chat_id_,msg.id_)
                         elseif text:match("(markread) (.*)") or text:match("(بازدید) (.*)") then
                           local matches = text:match("markread (.*)") or text:match("بازدید (.*)")
